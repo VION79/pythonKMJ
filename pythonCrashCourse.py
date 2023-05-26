@@ -43,3 +43,7 @@ def best_food_ever ():
 
 def convert_to_currency (integer):
     return "$" + str(integer)
+
+profession = "Developer"
+profession.upper()
+
