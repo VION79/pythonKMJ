@@ -151,6 +151,100 @@ input_string = "  hello  "
 def cleanup(input_string):
     return input_string.strip().capitalize()
 
+##### LIST ######
+# Mutable data structure that holds an ordered collection of elements
+#In
+[1, 2, 3, 4]
+#Out
+[1, 2, 3, 4]
+#In
+[True, False, False, True]
+#Out
+[True, False, False, True]
+#In
+Party_attendees = ["Myung", "Michael", "Jason"]
+Party_attendees
+#Out
+['Myung', 'Michael', 'Jason']
+#In
+len(Party_attendees)
+#out
+3
+#In
+type(Party_attendees)
+#out
+list
+#in
+presidents = ["Washington", "Jefferson"]
+presidents
+#out
+['Washington', 'Jefferson']
+#in
+presidents.append("Madison")
+presidents
+#out
+['Washington', 'Jefferson', 'Madison']
+#in
+popcorn = ["Salted", "Unsalted", "Caramel"]
+popcorn
+#out
+['Salted', 'Unsalted', 'Caramel']
+#in
+popcorn.pop()
+#out
+'Caramel'
+#in
+popcorn
+#out
+['Salted', 'Unsalted']
+#in
+popcorn.remove("Salted")
+popcorn
+#out
+['Unsalted']
+#in
+"cat" in "caterpillar"
+#out
+True
+#in
+planets = ["Mercury", "Venus", "Earth", "Mars"]
+"Earth" in planets
+#out
+True
+#in
+"earth" in planets
+False
+#in
+"Pluto" not in planets
+#out
+True
+#in
+"Mars" not in planets
+#out
+False
+
+# Create an empty list and assign it to the variable "empty".
+empty = []
+
+# Create a list with a single Boolean — True — and assign it to the variable "active".
+active = [True]
+
+# Create a list with 5 integers of your choice and assign it to the variable "favorite_numbers".
+favorite_numbers = [1, 2, 3, 5, 6]
+
+# Create a list with 3 strings  — "red", "green", "blue" — and assign it to the variable "colors".
+colors = ["red", "green", "blue"]
+
+# Declare an is_long function that accepts a single list as an argument
+# It should return True if the list has more than 5 elements, and False otherwise
+def is_long(list):
+    return len(list) > 5
+
+
+
+
+
+
 
 
 
