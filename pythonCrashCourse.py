@@ -20,19 +20,17 @@ def convert_to_fahrenheit(celsius_temp = 0):
 convert_to_fahrenheit()
 32.0
 
-##############################    
+#### Test #### 
 
 # Define a easy_money function that accepts no parameters 
 # and always returns the value 100.
 def easy_money ():
     return 100
 
-
 # Define a best_food_ever function that accepts 
 # no parameters and always returns the string “Sushi”.
 def best_food_ever ():
     return "Sushi"
-
 
 # Define a convert_to_currency function that accepts a single parameter (an integer). 
 # The function should convert the argument to a string, prefix it with a dollar sign, and return the result.
@@ -40,11 +38,12 @@ def best_food_ever ():
 # EXAMPLES:
 # convert_to_currency(15)    =&gt; "$15"
 # convert_to_currency(8)     =&gt; "$8"
-
 def convert_to_currency (integer):
     return "$" + str(integer)
 
+#####################
 ## String Method ####
+#####################
 
 profession = "Developer"
 profession.upper()
@@ -119,6 +118,8 @@ True
 "rhino" not in animal
 False
 
+#### Test ####
+
 # Define a 'scientist' variable set to the string 'albert einstein'
 # Invoke the title method on the string/variable
 # Assign the returned string to a 'proper_name' variable
@@ -151,7 +152,10 @@ input_string = "  hello  "
 def cleanup(input_string):
     return input_string.strip().capitalize()
 
+#################
 ##### LIST ######
+#################
+
 # Mutable data structure that holds an ordered collection of elements
 #In
 [1, 2, 3, 4]
@@ -223,6 +227,8 @@ True
 #out
 False
 
+#### Test ####
+
 # Create an empty list and assign it to the variable "empty".
 empty = []
 
@@ -240,6 +246,69 @@ colors = ["red", "green", "blue"]
 def is_long(list):
     return len(list) > 5
 
+#######################################
+##### Index Position and Slicing ######
+#######################################
+
+in 
+spiderman = "Spiderman"
+len(spiderman)
+
+out
+9
+
+in
+spiderman[0]
+spiderman[1]
+spiderman[4]
+spiderman[8]
+
+out
+9
+
+in
+spiderman[-1]
+spiderman[-9]
+
+out
+'S'
+
+in
+superheros = ["Spiderman", "Batman", "Superman", "Wolverine", "Ironman"]
+len(superheros)
+
+out
+5
+
+in
+superheros[0]
+
+out
+'Spiderman'
+
+in
+superheros[-5]
+
+out
+'Spiderman'
+
+in
+superheros[4]
+
+out
+'Ironman'
+
+in
+superheros[-1]
+
+out
+'Ironman'
+
+in
+superheros[1:3]
+
+out
+['Batman', 'Superman']
 
 
 
