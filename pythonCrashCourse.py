@@ -310,6 +310,231 @@ superheros[1:3]
 out
 ['Batman', 'Superman']
 
+in
+superheros[2:4]
+
+out
+['Superman', 'Wolverine']
+
+in
+spiderman[1:5]
+
+out
+'pide'
+
+in
+superheros[0:2]
+
+out
+['Spiderman', 'Batman']
+
+in
+superheros[:2]
+
+out
+['Spiderman', 'Batman']
+
+in
+spiderman[0:6]
+
+out
+'Spider'
+
+in
+spiderman[:6]
+
+out
+'Spider'
+
+in
+superheros[2:5]
+
+out
+['Superman', 'Wolverine', 'Ironman']
+
+in
+superheros[2:6]
+
+out
+['Superman', 'Wolverine', 'Ironman']
+
+in
+superheros[2:]
+
+out
+['Superman', 'Wolverine', 'Ironman']
+
+in
+superheros[:]
+
+out
+['Spiderman', 'Batman', 'Superman', 'Wolverine', 'Ironman']
+
+in
+spiderman[3:9]
+
+out
+'derman'
+
+in
+spiderman[3:]
+
+out
+'derman'
+
+in
+spiderman[3:-1]
+
+out
+'derma'
+
+in
+spiderman[3:8]
+
+out
+'derma'
+
+######### Test ###############
+
+# The nuts list below contains 7 strings
+nuts = ["Almonds", "Cashews", "Hazelnuts", "Brazil", "Macadamia", "Pecan", "Pistachio"]
+
+# Extract the "Cashews" string by indexing into the "nuts" list above
+# Assign the value to the variable below
+cashews = nuts[1]
+
+# Extract the "Pecan" string by indexing into the "nuts" list above
+# Assign the value to the variable below
+pecan = nuts[-2]
+
+# Extract the "Pistachio" string by indexing into the "nuts" list above
+# Assign the value to the variable below
+pistachio = nuts[6]
+
+# Extract the "Almonds" string by indexing into the "nuts" list above
+# Assign the value to the variable below
+almonds = nuts[-7]
+
+#######################################
+##### Dictionaries ######
+#######################################
+
+#An unordered collection of key-value pairs
+
+in
+#Filet mignon -29.99
+menu = {
+    "Filet Mignon": 29.99,
+    "Big Mac": 3.99,
+    "Pizza": 0.99,
+    "Salmon": 29.99,
+    "Pizza": 1.99
+}
+menu
+
+out
+{'Filet Mignon': 29.99, 'Big Mac': 3.99, 'Pizza': 1.99, 'Salmon': 29.99}
+
+in
+len(menu)
+
+out
+4
+
+in
+menu["tuna"]
+
+out
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+Cell In[64], line 1
+----> 1 menu["tuna"]
+
+KeyError: 'tuna'
+
+#in
+menu["Burrito"] = 13.99
+menu
+
+#out
+{'Filet Mignon': 29.99,
+ 'Big Mac': 3.99,
+ 'Pizza': 1.99,
+ 'Salmon': 29.99,
+ 'Burrito': 13.99}
+
+#in
+menu["Pizza"] = 4.25
+menu
+
+#out
+{'Filet Mignon': 29.99,
+ 'Big Mac': 3.99,
+ 'Pizza': 4.25,
+ 'Salmon': 29.99,
+ 'Burrito': 13.99}
+
+#in
+menu.pop("Filet Mignon")
+
+#out
+29.99
+
+#in
+menu
+
+#out
+{'Big Mac': 3.99, 'Pizza': 4.25, 'Salmon': 29.99, 'Burrito': 13.99}
+
+#in
+"Pizza" in menu
+#out
+True
+
+#in
+"Hot Pockets" in menu
+#out
+False
+
+#in
+"Bubble Gum" not in menu
+#out
+True
+
+#in
+"Burrito" not in menu
+#out
+False
+
+#in
+29.99 in menu
+#out
+False
+
+#in
+# 29.99 is not one of the keys therefore the result is false
+menu.values()
+#out
+dict_values([3.99, 4.25, 29.99, 13.99])
+
+#in
+29.99 in menu.values()
+#out
+True
+
+######## Test ###########
+# Create an empty dictionary and assign it to the variable empty.
+empty = {}
+
+# Create a dictionary with three key-value pairs. 
+# The keys should be strings and the values should be integer values. 
+# Assign the dictionary to a my_dict variable.
+
+my_dict = {
+    "one": 1,
+    "two": 2,
+    "three": 3
+}
 
 
 
