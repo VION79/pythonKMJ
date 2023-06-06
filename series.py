@@ -128,5 +128,91 @@ prices.mean()
 #out
 2.9333333333333336
 
+## Intro to Attributes
+
+#in
+adjectives = pd.Series(["Smart", "Handsome", "Charming", "Brilliant", "Humble"])
+adjectives
+
+#out
+0        Smart
+1     Handsome
+2     Charming
+3    Brilliant
+4       Humble
+dtype: object
+
+#in
+adjective.size
+
+#out
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[14], line 1
+----> 1 adjective.size
+
+NameError: name 'adjective' is not defined
+
+#in
+adjectives.size
+
+#out
+5
+
+#in
+adjectives.is_unique #This checks for any duplicates
+
+#out
+True
+
+#in
+adjectives.values
+
+#out
+array(['Smart', 'Handsome', 'Charming', 'Brilliant', 'Humble'],
+      dtype=object)
+
+#in
+type(adjectives.values)
+
+#out
+numpy.ndarray
+
+#in
+adjectives.index
+
+#out
+RangeIndex(start=0, stop=5, step=1)
+
+#in
+type(adjectives.index)
+
+#out
+pandas.core.indexes.range.RangeIndex
+
+#in
+adjectives.dtype
+
+#out
+dtype('O')
+
+##### Test #####
+import pandas as pd
+
+# The Series below stores the number of home runs
+# that a baseball player hit per game
+home_runs = pd.Series([3, 4, 8, 2])
+
+# Find the total number of home runs (i.e. the sum) and assign it
+# to the total_home_runs variable below
+total_home_runs = home_runs.sum()
+
+# Find the average number of home runs and assign it
+# to the average_home_runs variable below
+average_home_runs = home_runs.mean()
+
+
+
+
 
 
