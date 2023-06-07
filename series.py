@@ -211,6 +211,105 @@ total_home_runs = home_runs.sum()
 # to the average_home_runs variable below
 average_home_runs = home_runs.mean()
 
+## Parameter and Arguments
+
+# Parameter - The name we give to an expected input
+# Argument - The concrete value that we provide to a parameter
+
+# Difficulty - Easy, Medium, Hard
+# Volume - 1 through 10
+# Subtitles - True, False
+
+#in
+fruits = ["Apple", "Orange", "Plum", "Grape", "Blueberry"]
+weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Monday"]
+pd.Series(fruits)
+#out
+0        Apple
+1       Orange
+2         Plum
+3        Grape
+4    Blueberry
+dtype: object
+
+#in
+pd.Series(weekdays)
+#out
+0       Monday
+1      Tuesday
+2    Wednesday
+3     Thursday
+4       Friday
+dtype: object
+
+#in
+pd.Series(fruits, weekdays)
+#out
+Monday           Apple
+Tuesday         Orange
+Wednesday         Plum
+Thursday         Grape
+Friday       Blueberry
+dtype: object
+
+#in
+pd.Series(weekdays, fruits)
+#out
+Apple           Monday
+Orange         Tuesday
+Plum         Wednesday
+Grape         Thursday
+Blueberry       Friday
+dtype: object
+
+#in
+pd.Series(data = fruits, index = weekdays) # This approach of coding is more reader friendly
+#out
+Monday           Apple
+Tuesday         Orange
+Wednesday         Plum
+Thursday         Grape
+Friday       Blueberry
+dtype: object
+
+#in
+pd.Series(fruits, index = weekdays)
+#out
+Monday           Apple
+Tuesday         Orange
+Wednesday         Plum
+Thursday         Grape
+Friday       Blueberry
+dtype: object
+
+## Test ##
+# If you see a test failure when checking your solution,
+# note that [left] refers to YOUR code while [right]
+# refers to the correct code that the computer is comparing
+# to your work
+
+# The code below defines a list of delicious foods
+# and some dipping sauces to dip them in
+import pandas as pd
+
+foods = ["French Fries", "Chicken Nuggets", "Celery", "Carrots"]
+dipping_sauces = ["BBQ", "Honey Mustard", "Ranch", "Sriracha"]
+
+# Create a Series and assign it to the s1 variable below. 
+# Assign the foods list as the data source
+# and the dipping_sauces list as the Series index 
+# For this solution, use positional arguments (i.e. feed in the arguments sequentially)
+s1 = pd.Series(foods, dipping_sauces)
+
+
+# Create a Series and assign it to the s2 variable below. 
+# Assign the dipping_sauces list as the data source
+# and the foods list as the Series index 
+# For this solution, use keyword arguments (i.e. provide the parameter names
+# alongside the arguments)
+s2 = pd.Series(data = dipping_sauces, index = foods)
+
+
 
 
 
