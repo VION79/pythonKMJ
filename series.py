@@ -309,9 +309,323 @@ s1 = pd.Series(foods, dipping_sauces)
 # alongside the arguments)
 s2 = pd.Series(data = dipping_sauces, index = foods)
 
+#################################################
+## Import Series with the pd.read_csv Function ##
+
+#in
+pd.read_csv()
+#out
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Cell In[33], line 1
+----> 1 pd.read_csv()
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\util\_decorators.py:211, in deprecate_kwarg.<locals>._deprecate_kwarg.<locals>.wrapper(*args, **kwargs)
+    209     else:
+    210         kwargs[new_arg_name] = new_arg_value
+--> 211 return func(*args, **kwargs)
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\util\_decorators.py:331, in deprecate_nonkeyword_arguments.<locals>.decorate.<locals>.wrapper(*args, **kwargs)
+    325 if len(args) > num_allow_args:
+    326     warnings.warn(
+    327         msg.format(arguments=_format_argument_list(allow_args)),
+    328         FutureWarning,
+    329         stacklevel=find_stack_level(),
+    330     )
+--> 331 return func(*args, **kwargs)
+
+TypeError: read_csv() missing 1 required positional argument: 'filepath_or_buffer'
+
+#in
+pd.read_csv("pokemon.csv")
+#out
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[1], line 1
+----> 1 pd.read_csv("pokemon.csv")
+
+NameError: name 'pd' is not defined
+
+#in
+import pandas as pd
+pd.read_csv("pokemon.csv")
+#out
+Pokemon	Type
+0	Bulbasaur	Grass
+1	Ivysaur	Grass
+2	Venusaur	Grass
+3	Charmander	Fire
+4	Charmeleon	Fire
+...	...	...
+716	Yveltal	Dark
+717	Zygarde	Dragon
+718	Diancie	Rock
+719	Hoopa	Psychic
+720	Volcanion	Fire
+
+721 rows × 2 columns
+
+#in
+pd.read_csv("pokemon.csv", usecols = ["Pokemon"])
+#out
+Pokemon
+0	Bulbasaur
+1	Ivysaur
+2	Venusaur
+3	Charmander
+4	Charmeleon
+...	...
+716	Yveltal
+717	Zygarde
+718	Diancie
+719	Hoopa
+720	Volcanion
+
+721 rows × 1 columns
+
+#in
+pd.read_csv("pokemon.csv", usecols = ["Pokemon"]).squeeze()
+#out
+0       Bulbasaur
+1         Ivysaur
+2        Venusaur
+3      Charmander
+4      Charmeleon
+          ...    
+716       Yveltal
+717       Zygarde
+718       Diancie
+719         Hoopa
+720     Volcanion
+Name: Pokemon, Length: 721, dtype: object
+
+#in
+pd.read_csv("pokemon.csv", usecols = ["Pokemon"]).squeeze("colums")
+#out
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\generic.py:554, in NDFrame._get_axis_number(cls, axis)
+    553 try:
+--> 554     return cls._AXIS_TO_AXIS_NUMBER[axis]
+    555 except KeyError:
+
+KeyError: 'colums'
+
+During handling of the above exception, another exception occurred:
+
+ValueError                                Traceback (most recent call last)
+Cell In[6], line 1
+----> 1 pd.read_csv("pokemon.csv", usecols = ["Pokemon"]).squeeze("colums")
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\generic.py:1032, in NDFrame.squeeze(self, axis)
+    928 @final
+    929 def squeeze(self, axis=None):
+    930     """
+    931     Squeeze 1 dimensional axis objects into scalars.
+    932 
+   (...)
+   1030     1
+   1031     """
+-> 1032     axis = range(self._AXIS_LEN) if axis is None else (self._get_axis_number(axis),)
+   1033     return self.iloc[
+   1034         tuple(
+   1035             0 if i in axis and len(a) == 1 else slice(None)
+   1036             for i, a in enumerate(self.axes)
+   1037         )
+   1038     ]
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\generic.py:556, in NDFrame._get_axis_number(cls, axis)
+    554     return cls._AXIS_TO_AXIS_NUMBER[axis]
+    555 except KeyError:
+--> 556     raise ValueError(f"No axis named {axis} for object type {cls.__name__}")
+
+ValueError: No axis named colums for object type DataFrame
+
+#in
+pd.read_csv("pokemon.csv", usecols = ["Pokemon"]).squeeze("columns")
+#out
+0       Bulbasaur
+1         Ivysaur
+2        Venusaur
+3      Charmander
+4      Charmeleon
+          ...    
+716       Yveltal
+717       Zygarde
+718       Diancie
+719         Hoopa
+720     Volcanion
+Name: Pokemon, Length: 721, dtype: object
+
+#in
+pokemon = pd.read_csv("pokemon.csv", usecols = ["Pokemon"]).squeeze("columns")
+pokemon
+#out
+0       Bulbasaur
+1         Ivysaur
+2        Venusaur
+3      Charmander
+4      Charmeleon
+          ...    
+716       Yveltal
+717       Zygarde
+718       Diancie
+719         Hoopa
+720     Volcanion
+Name: Pokemon, Length: 721, dtype: object
+
+#in
+pd.read_csv("google_stock_price.csv")
+#out
+Stock Price
+0	50.12
+1	54.10
+2	54.65
+3	52.38
+4	52.95
+...	...
+3007	772.88
+3008	771.07
+3009	773.18
+3010	771.61
+3011	782.22
+3012 rows × 1 columns
+
+#in
+google = pd.read_csv("google_stock_price.csv", usecols = ["Stock Price"]), squeeze()
+google
+#out
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[11], line 1
+----> 1 google = pd.read_csv("google_stock_price.csv", usecols = ["Stock Price"]), squeeze()
+      2 google
+
+NameError: name 'squeeze' is not defined
+
+#in
+google = pd.read_csv("google_stock_price.csv", usecols = ["Stock Price"]).squeeze()
+google
+#out
+0        50.12
+1        54.10
+2        54.65
+3        52.38
+4        52.95
+         ...  
+3007    772.88
+3008    771.07
+3009    773.18
+3010    771.61
+3011    782.22
+Name: Stock Price, Length: 3012, dtype: float64
+
+## EXERCISE ##
+
+# If you see a test failure when checking your solution,
+# note that [left] refers to YOUR code while [right]
+# refers to the correct code that the computer is comparing
+# to your work
+
+import pandas as pd
+
+# We have a foods.csv CSV file with 3 columns: Item Number, Menu Item, Price
+# You can explore the data by clicking into the foods.csv file on the left
+# Import the CSV file into a pandas Series object
+# The Series should have the standard pandas numeric index
+# The Series values should be the string values from the "Menu Item" column
+# Assign the Series object to a "foods" variable
+foods = pd.read_csv("foods.csv", usecols = ["Menu Item"]).squeeze("columns")
 
 
 
+## The head and tail Methods on a Series ##
+#################################################
+
+#in
+import pandas as pd
+pd.read_csv("pokemon.csv")
+#out
+Pokemon	Type
+0	Bulbasaur	Grass
+1	Ivysaur	Grass
+2	Venusaur	Grass
+3	Charmander	Fire
+4	Charmeleon	Fire
+...	...	...
+716	Yveltal	Dark
+717	Zygarde	Dragon
+718	Diancie	Rock
+719	Hoopa	Psychic
+720	Volcanion	Fire
+721 rows × 2 columns
+
+#in
+pokemon = pd.read_csv("pokemon.csv", usecols = ["Pokemon"]).squeeze("columns")
+google = pd.read_csv("google_stock_price.csv", usecols = ["Stock Price"]).squeeze()
+pokemon.head()
+pokemon.head(5)
+pokemon.head(n = 5)
+#out
+0     Bulbasaur
+1       Ivysaur
+2      Venusaur
+3    Charmander
+4    Charmeleon
+Name: Pokemon, dtype: object
+
+#in
+pokemon.head(10)
+#out
+0     Bulbasaur
+1       Ivysaur
+2      Venusaur
+3    Charmander
+4    Charmeleon
+5     Charizard
+6      Squirtle
+7     Wartortle
+8     Blastoise
+9      Caterpie
+Name: Pokemon, dtype: object
+
+#in
+google.tail(5)
+#out
+3011    782.22
+Name: Stock Price, dtype: float64
+
+## EXERCISE ##
+
+# If you see a test failure when checking your solution,
+# note that [left] refers to YOUR code while [right]
+# refers to the correct code that the computer is comparing
+# to your work
+
+import pandas as pd
+
+# We have a roller_coasters.csv CSV file with 4 columns: Name, Park, Country, and Height.
+# You can explore the data by clicking into the CSV file on the left
+# Import the CSV file into a pandas Series object
+# The Series should have the standard pandas numeric index
+# The Series values should be the string values from the "Name" column
+# Assign the Series object to a "coasters" variable
+coasters = pd.read_csv("roller_coasters.csv", usecols = ["Name"]).squeeze()
+
+# I only want to ride the top 3 roller coasters on the list.
+# Starting with the "coasters" Series, extract the first 3 rows in a new Series.
+# Assign the new Series to a "top_three" variable.
+top_three = coasters.head(3)
+
+# I'm now curious about some of the last entries on the coaster list.
+# Starting with the "coasters" Series, extract the last 4 rows in a new Series.
+# Assign the new Series to a "bottom_four" variable.
+bottom_four = coasters.tail(4)
+
+
+#################################################
+
+#################################################
 
 
 
