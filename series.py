@@ -4280,15 +4280,340 @@ min(google)
 #out
 49.95
 
-
-
-## EXERCISE ##
-
-
- ##
+## The sort_values Method ##
 #################################################
 
+#in
+pokemon.sort_value()
+#out
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+Cell In[30], line 1
+----> 1 pokemon.sort_value()
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\generic.py:5902, in NDFrame.__getattr__(self, name)
+   5895 if (
+   5896     name not in self._internal_names_set
+   5897     and name not in self._metadata
+   5898     and name not in self._accessors
+   5899     and self._info_axis._can_hold_identifiers_and_holds_name(name)
+   5900 ):
+   5901     return self[name]
+-> 5902 return object.__getattribute__(self, name)
+
+AttributeError: 'Series' object has no attribute 'sort_value'
+
+#in
+pokemon.sort_values()
+#out
+459    Abomasnow
+62          Abra
+358        Absol
+616     Accelgor
+680    Aegislash
+         ...    
+570      Zoroark
+569        Zorua
+40         Zubat
+633     Zweilous
+717      Zygarde
+Name: Pokemon, Length: 721, dtype: object
+
+#in
+pokemon.sort_values().head()
+#out
+459    Abomasnow
+62          Abra
+358        Absol
+616     Accelgor
+680    Aegislash
+Name: Pokemon, dtype: object
+
+#in
+pokemon.sort_values(ascending = True).head()
+#out
+459    Abomasnow
+62          Abra
+358        Absol
+616     Accelgor
+680    Aegislash
+Name: Pokemon, dtype: object
+
+#in
+pokemon.sort_values(ascending = False)
+#out
+717      Zygarde
+633     Zweilous
+40         Zubat
+569        Zorua
+570      Zoroark
+         ...    
+680    Aegislash
+616     Accelgor
+358        Absol
+62          Abra
+459    Abomasnow
+Name: Pokemon, Length: 721, dtype: object
+
+#in
+pokemon.sort_values(ascending = False).head()
+#out
+717     Zygarde
+633    Zweilous
+40        Zubat
+569       Zorua
+570     Zoroark
+Name: Pokemon, dtype: object
+
+#in
+google.sort_values()
+#out
+11       49.95
+9        50.07
+0        50.12
+10       50.70
+12       50.74
+         ...  
+3010    771.61
+3007    772.88
+3009    773.18
+2859    776.60
+3011    782.22
+Name: Stock Price, Length: 3012, dtype: float64
+
+#in
+google.sort_values(ascending = True)
+#out
+11       49.95
+9        50.07
+0        50.12
+10       50.70
+12       50.74
+         ...  
+3010    771.61
+3007    772.88
+3009    773.18
+2859    776.60
+3011    782.22
+Name: Stock Price, Length: 3012, dtype: float64
+
+#in
+google.sort_values(ascending = False).head()
+#out
+3011    782.22
+2859    776.60
+3009    773.18
+3007    772.88
+3010    771.61
+Name: Stock Price, dtype: float64
+
 ## EXERCISE ##
+# If you see a test failure when checking your solution,
+# note that [left] refers to YOUR code while [right]
+# refers to the correct code that the computer is comparing
+# to your work
+
+import pandas as pd
+
+# Below, we have a list of delicious tortilla chip flavors
+flavors = ["Spicy Sweet Chili", "Cool Ranch", "Nacho Cheese", "Salsa Verde"]
+
+# Create a new Series object, passing in the flavors list defined above
+# Assign it to a 'doritos' variable. The resulting Series should look like this:
+#
+#
+#   0    Spicy Sweet Chili
+#   1           Cool Ranch
+#   2         Nacho Cheese
+#   3          Salsa Verde
+#   dtype: object
+
+doritos = pd.Series(flavors)
+
+# Below, sort the doritos Series in descending order.
+# Assign the sorted a Series to a 'sorted_doritos' variable.
+# The sorted Series should like this:
+#
+#   0    Spicy Sweet Chili
+#   3          Salsa Verde
+#   2         Nacho Cheese
+#   1           Cool Ranch
+#   dtype: object
+
+sorted_doritos = doritos.sort_values(ascending = False)
+
+#in
+pd.read_csv("pokemon.csv")
+#out
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Cell In[1], line 1
+----> 1 pd.read_csv("pokemon.csv")
+
+NameError: name 'pd' is not defined
+
+#in
+import pandas as pd
+pd.read_csv("pokemon.csv")
+#out
+Pokemon	Type
+0	Bulbasaur	Grass
+1	Ivysaur	Grass
+2	Venusaur	Grass
+3	Charmander	Fire
+4	Charmeleon	Fire
+...	...	...
+716	Yveltal	Dark
+717	Zygarde	Dragon
+718	Diancie	Rock
+719	Hoopa	Psychic
+720	Volcanion	Fire
+721 rows × 2 columns
+
+#in
+pd.read_csv("pokemon.csv", index_col = "Pokemon")
+#out
+Type
+Pokemon	
+Bulbasaur	Grass
+Ivysaur	Grass
+Venusaur	Grass
+Charmander	Fire
+Charmeleon	Fire
+...	...
+Yveltal	Dark
+Zygarde	Dragon
+Diancie	Rock
+Hoopa	Psychic
+Volcanion	Fire
+721 rows × 1 columns
+
+#in
+pd.read_csv("pokemon.csv", index_col = "Pokemon").squeeze("columns")
+#out
+Pokemon
+Bulbasaur       Grass
+Ivysaur         Grass
+Venusaur        Grass
+Charmander       Fire
+Charmeleon       Fire
+               ...   
+Yveltal          Dark
+Zygarde        Dragon
+Diancie          Rock
+Hoopa         Psychic
+Volcanion        Fire
+Name: Type, Length: 721, dtype: object
+
+#in
+pokemon = pd.read_csv("pokemon.csv", index_col = "Pokemon").squeeze("columns")
+pokemon
+#out
+Pokemon
+Bulbasaur       Grass
+Ivysaur         Grass
+Venusaur        Grass
+Charmander       Fire
+Charmeleon       Fire
+               ...   
+Yveltal          Dark
+Zygarde        Dragon
+Diancie          Rock
+Hoopa         Psychic
+Volcanion        Fire
+Name: Type, Length: 721, dtype: object
+
+#in
+pokemon = pd.read_csv("pokemon.csv", index_col = "Pokemon").squeeze("columns")
+pokemon.head()
+#out
+Pokemon
+Bulbasaur     Grass
+Ivysaur       Grass
+Venusaur      Grass
+Charmander     Fire
+Charmeleon     Fire
+Name: Type, dtype: object
+
+#in
+pokemon.sort_index()
+#out
+Pokemon
+Abomasnow      Grass
+Abra         Psychic
+Absol           Dark
+Accelgor         Bug
+Aegislash      Steel
+              ...   
+Zoroark         Dark
+Zorua           Dark
+Zubat         Poison
+Zweilous        Dark
+Zygarde       Dragon
+Name: Type, Length: 721, dtype: object
+
+#in
+pokemon.sort_index(ascending = True)
+#out
+Pokemon
+Abomasnow      Grass
+Abra         Psychic
+Absol           Dark
+Accelgor         Bug
+Aegislash      Steel
+              ...   
+Zoroark         Dark
+Zorua           Dark
+Zubat         Poison
+Zweilous        Dark
+Zygarde       Dragon
+Name: Type, Length: 721, dtype: object
+
+#in
+pokemon.sort_index(ascending = False)
+#out
+Pokemon
+Zygarde       Dragon
+Zweilous        Dark
+Zubat         Poison
+Zorua           Dark
+Zoroark         Dark
+              ...   
+Aegislash      Steel
+Accelgor         Bug
+Absol           Dark
+Abra         Psychic
+Abomasnow      Grass
+Name: Type, Length: 721, dtype: object
+
+## EXERCISE ##
+# If you see a test failure when checking your solution,
+# note that [left] refers to YOUR code while [right]
+# refers to the correct code that the computer is comparing
+# to your work
+import pandas as pd
+
+# Below, we have a list of delicious drink flavors
+# We create a sorted Series of strings and assign it to a 'gatorade' variable
+flavors = ["Red", "Blue", "Green", "Orange"]
+gatorade = pd.Series(flavors).sort_values()
+
+# I'd like to return the Series to its original order 
+# (sorted by the numeric index in ascending order). 
+# Sort the gatorade Series by index.
+# Assign the result to an 'original' variable.
+original = pd.Series(flavors).sort_index()
+#or
+original = gatorade.sort_index()
+
+
+
+
+
+##
+#################################################
+
+
 
  ##
 #################################################
