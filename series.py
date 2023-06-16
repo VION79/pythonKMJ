@@ -4842,13 +4842,462 @@ super_high_calorie = 400 in coffee.values
 ## Extract Series Value by Index Position ##
 #################################################
 
+#in
+import pandas as pd
+pokemon = pd.read_csv("pokemon.csv", usecols = ["Pokemon"]).squeeze("columns")
+pokemon.head()
+#out
+0     Bulbasaur
+1       Ivysaur
+2      Venusaur
+3    Charmander
+4    Charmeleon
+Name: Pokemon, dtype: object
+
+#in
+pokemon[]
+#out
+  Cell In[4], line 1
+    pokemon[]
+            ^
+SyntaxError: invalid syntax
+
+#in
+pokemon
+#out
+0       Bulbasaur
+1         Ivysaur
+2        Venusaur
+3      Charmander
+4      Charmeleon
+          ...    
+716       Yveltal
+717       Zygarde
+718       Diancie
+719         Hoopa
+720     Volcanion
+Name: Pokemon, Length: 721, dtype: object
+
+#in
+pokemon[0]
+#out
+
+#in
+pokemon[500]
+#out
+'Oshawott'
+
+#in
+pokemon[1500]
+#out
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\indexes\range.py:391, in RangeIndex.get_loc(self, key, method, tolerance)
+    390 try:
+--> 391     return self._range.index(new_key)
+    392 except ValueError as err:
+
+ValueError: 1500 is not in range
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+Cell In[8], line 1
+----> 1 pokemon[1500]
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\series.py:981, in Series.__getitem__(self, key)
+    978     return self._values[key]
+    980 elif key_is_scalar:
+--> 981     return self._get_value(key)
+    983 if is_hashable(key):
+    984     # Otherwise index.get_value will raise InvalidIndexError
+    985     try:
+    986         # For labels that don't resolve as scalars like tuples and frozensets
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\series.py:1089, in Series._get_value(self, label, takeable)
+   1086     return self._values[label]
+   1088 # Similar to Index.get_value, but we do not fall back to positional
+-> 1089 loc = self.index.get_loc(label)
+   1090 return self.index._get_values_for_loc(self, loc, label)
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\indexes\range.py:393, in RangeIndex.get_loc(self, key, method, tolerance)
+    391         return self._range.index(new_key)
+    392     except ValueError as err:
+--> 393         raise KeyError(key) from err
+    394 self._check_indexing_error(key)
+    395 raise KeyError(key)
+
+KeyError: 1500
+
+#in
+pokemon[] #holddown shift button and press tab button to see all the possible options to go into []
+#out
+Cell In[9], line 1
+    pokemon[] #holddown shift button and press tab button to see all the possible options to go into []
+            ^
+SyntaxError: invalid syntax
+
+#in
+pokemon[[100, 200, 300]]
+#out
+100    Electrode
+200        Unown
+300     Delcatty
+Name: Pokemon, dtype: object
+
+#in
+pokemon[27:35]
+#out
+27    Sandslash
+28      Nidoran
+29     Nidorina
+30    Nidoqueen
+31     Nidoran♂
+32     Nidorino
+33     Nidoking
+34     Clefairy
+Name: Pokemon, dtype: object
+
+#in
+pokemon[0:7]
+#out
+0     Bulbasaur
+1       Ivysaur
+2      Venusaur
+3    Charmander
+4    Charmeleon
+5     Charizard
+6      Squirtle
+Name: Pokemon, dtype: object
+
+#in
+pokemon.head(7)
+#out
+0     Bulbasaur
+1       Ivysaur
+2      Venusaur
+3    Charmander
+4    Charmeleon
+5     Charizard
+6      Squirtle
+Name: Pokemon, dtype: object
+
+#in
+pokemon[700:]
+#out
+700     Hawlucha
+701      Dedenne
+702      Carbink
+703        Goomy
+704      Sliggoo
+705       Goodra
+706       Klefki
+707     Phantump
+708    Trevenant
+709    Pumpkaboo
+710    Gourgeist
+711     Bergmite
+712      Avalugg
+713       Noibat
+714      Noivern
+715      Xerneas
+716      Yveltal
+717      Zygarde
+718      Diancie
+719        Hoopa
+720    Volcanion
+Name: Pokemon, dtype: object
+
+#in
+pokemon[-1]
+#out
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\indexes\range.py:391, in RangeIndex.get_loc(self, key, method, tolerance)
+    390 try:
+--> 391     return self._range.index(new_key)
+    392 except ValueError as err:
+
+ValueError: -1 is not in range
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+Cell In[15], line 1
+----> 1 pokemon[-1]
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\series.py:981, in Series.__getitem__(self, key)
+    978     return self._values[key]
+    980 elif key_is_scalar:
+--> 981     return self._get_value(key)
+    983 if is_hashable(key):
+    984     # Otherwise index.get_value will raise InvalidIndexError
+    985     try:
+    986         # For labels that don't resolve as scalars like tuples and frozensets
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\series.py:1089, in Series._get_value(self, label, takeable)
+   1086     return self._values[label]
+   1088 # Similar to Index.get_value, but we do not fall back to positional
+-> 1089 loc = self.index.get_loc(label)
+   1090 return self.index._get_values_for_loc(self, loc, label)
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\indexes\range.py:393, in RangeIndex.get_loc(self, key, method, tolerance)
+    391         return self._range.index(new_key)
+    392     except ValueError as err:
+--> 393         raise KeyError(key) from err
+    394 self._check_indexing_error(key)
+    395 raise KeyError(key)
+
+KeyError: -1
+
+#in
+pokemon[-20:-10]
+#out
+701      Dedenne
+702      Carbink
+703        Goomy
+704      Sliggoo
+705       Goodra
+706       Klefki
+707     Phantump
+708    Trevenant
+709    Pumpkaboo
+710    Gourgeist
+Name: Pokemon, dtype: object
+
+#in
+pokemon[-20:]
+#out
+701      Dedenne
+702      Carbink
+703        Goomy
+704      Sliggoo
+705       Goodra
+706       Klefki
+707     Phantump
+708    Trevenant
+709    Pumpkaboo
+710    Gourgeist
+711     Bergmite
+712      Avalugg
+713       Noibat
+714      Noivern
+715      Xerneas
+716      Yveltal
+717      Zygarde
+718      Diancie
+719        Hoopa
+720    Volcanion
+Name: Pokemon, dtype: object
+
+#in
+pokemon.tail(-20)
+#out
+20       Spearow
+21        Fearow
+22         Ekans
+23         Arbok
+24       Pikachu
+         ...    
+716      Yveltal
+717      Zygarde
+718      Diancie
+719        Hoopa
+720    Volcanion
+Name: Pokemon, Length: 701, dtype: object
+
+#in
+pokemon = pd.read_csv("pokemon.csv", index_col = ["Pokemon"]).squeeze("columns")
+pokemon.head()
+#out
+Pokemon
+Bulbasaur     Grass
+Ivysaur       Grass
+Venusaur      Grass
+Charmander     Fire
+Charmeleon     Fire
+Name: Type, dtype: object
+
+#in
+pokemon[0]
+#out
+'Grass'
+
+#in
+pokemon[[100, 134]]
+#out
+Pokemon
+Electrode    Electric
+Jolteon      Electric
+Name: Type, dtype: object
+
+#in
+pokemon["Bulbasaur"]
+#out
+'Grass'
+
+#in
+pokemon["Mewtwo"]
+#out
+'Psychic'
+
+#in
+pokemon[["Charizard", "Jolteon", "Meowth"]]
+#out
+Pokemon
+Charizard        Fire
+Jolteon      Electric
+Meowth         Normal
+Name: Type, dtype: object
+
+#in
+pokemon["Digimon"]
+#out
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\indexes\base.py:3802, in Index.get_loc(self, key, method, tolerance)
+   3801 try:
+-> 3802     return self._engine.get_loc(casted_key)
+   3803 except KeyError as err:
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\_libs\index.pyx:138, in pandas._libs.index.IndexEngine.get_loc()
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\_libs\index.pyx:165, in pandas._libs.index.IndexEngine.get_loc()
+
+File pandas\_libs\hashtable_class_helper.pxi:5745, in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+File pandas\_libs\hashtable_class_helper.pxi:5753, in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+KeyError: 'Digimon'
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+Cell In[25], line 1
+----> 1 pokemon["Digimon"]
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\series.py:981, in Series.__getitem__(self, key)
+    978     return self._values[key]
+    980 elif key_is_scalar:
+--> 981     return self._get_value(key)
+    983 if is_hashable(key):
+    984     # Otherwise index.get_value will raise InvalidIndexError
+    985     try:
+    986         # For labels that don't resolve as scalars like tuples and frozensets
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\series.py:1089, in Series._get_value(self, label, takeable)
+   1086     return self._values[label]
+   1088 # Similar to Index.get_value, but we do not fall back to positional
+-> 1089 loc = self.index.get_loc(label)
+   1090 return self.index._get_values_for_loc(self, loc, label)
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\indexes\base.py:3804, in Index.get_loc(self, key, method, tolerance)
+   3802     return self._engine.get_loc(casted_key)
+   3803 except KeyError as err:
+-> 3804     raise KeyError(key) from err
+   3805 except TypeError:
+   3806     # If we have a listlike key, _check_indexing_error will raise
+   3807     #  InvalidIndexError. Otherwise we fall through and re-raise
+   3808     #  the TypeError.
+   3809     self._check_indexing_error(key)
+
+KeyError: 'Digimon'
+
+#in
+pokemon[["Pikachu", "Digimon"]]
+#out
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+Cell In[26], line 1
+----> 1 pokemon[["Pikachu", "Digimon"]]
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\series.py:1007, in Series.__getitem__(self, key)
+   1004     key = np.asarray(key, dtype=bool)
+   1005     return self._get_values(key)
+-> 1007 return self._get_with(key)
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\series.py:1047, in Series._get_with(self, key)
+   1044         return self.iloc[key]
+   1046 # handle the dup indexing case GH#4246
+-> 1047 return self.loc[key]
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\indexing.py:1073, in _LocationIndexer.__getitem__(self, key)
+   1070 axis = self.axis or 0
+   1072 maybe_callable = com.apply_if_callable(key, self.obj)
+-> 1073 return self._getitem_axis(maybe_callable, axis=axis)
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\indexing.py:1301, in _LocIndexer._getitem_axis(self, key, axis)
+   1298     if hasattr(key, "ndim") and key.ndim > 1:
+   1299         raise ValueError("Cannot index with multidimensional key")
+-> 1301     return self._getitem_iterable(key, axis=axis)
+   1303 # nested tuple slicing
+   1304 if is_nested_tuple(key, labels):
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\indexing.py:1239, in _LocIndexer._getitem_iterable(self, key, axis)
+   1236 self._validate_key(key, axis)
+   1238 # A collection of keys
+-> 1239 keyarr, indexer = self._get_listlike_indexer(key, axis)
+   1240 return self.obj._reindex_with_indexers(
+   1241     {axis: [keyarr, indexer]}, copy=True, allow_dups=True
+   1242 )
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\indexing.py:1432, in _LocIndexer._get_listlike_indexer(self, key, axis)
+   1429 ax = self.obj._get_axis(axis)
+   1430 axis_name = self.obj._get_axis_name(axis)
+-> 1432 keyarr, indexer = ax._get_indexer_strict(key, axis_name)
+   1434 return keyarr, indexer
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\indexes\base.py:6070, in Index._get_indexer_strict(self, key, axis_name)
+   6067 else:
+   6068     keyarr, indexer, new_indexer = self._reindex_non_unique(keyarr)
+-> 6070 self._raise_if_missing(keyarr, indexer, axis_name)
+   6072 keyarr = self.take(indexer)
+   6073 if isinstance(key, Index):
+   6074     # GH 42790 - Preserve name from an Index
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\indexes\base.py:6133, in Index._raise_if_missing(self, key, indexer, axis_name)
+   6130     raise KeyError(f"None of [{key}] are in the [{axis_name}]")
+   6132 not_found = list(ensure_index(key)[missing_mask.nonzero()[0]].unique())
+-> 6133 raise KeyError(f"{not_found} not in index")
+
+KeyError: "['Digimon'] not in index"
+
 ## EXERCISE ##
 
- ##
+import pandas as pd
+
+# I have a dictionary that maps guitar types to their colors
+guitars_dict = {
+    "Fender Telecaster": "Baby Blue",
+    "Gibson Les Paul": "Sunburst",
+    "ESP Eclipse": "Dark Green"
+}
+
+# Create a new Series object, passing in the guitars_dict dictionary as the data source.
+# Assign the resulting Series to a "guitars" variable.
+guitars = pd.Series(guitars_dict)
+
+# Access the value for the index position of 0 within the "guitars" Series.
+# Assign the value to a "fender_color" variable.
+fender_color = guitars[0]
+
+# Access the value for the index label of "Gibson Les Paul" in the "guitars" Series.
+# Assign the value to a "gibson_color" variable.
+gibson_color = guitars["Gibson Les Paul"] 
+
+# Access the value for the index label of "ESP Eclipse" in the "guitars" Series.
+# Assign the value to a "esp_color" variable.
+esp_color = guitars["ESP Eclipse"]
+
+## The get Method on a Series ##
 #################################################
 
 ## EXERCISE ##
 
+##
+#################################################
+
+## EXERCISE ##
 
 
 
