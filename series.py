@@ -5409,7 +5409,109 @@ print(pokemon.get(["Moltres", "Gigimon"]))
 #out
 None
 
-## Overwrite a Series Value ##
+## Overwrite a Series Value #
+
+#in
+import pandas as pd
+pokemon = pd.read_csv("pokemon.csv", usecols = ["Pokemon"]).squeeze("columns")
+pokemon.head()
+#out
+0     Bulbasaur
+1       Ivysaur
+2      Venusaur
+3    Charmander
+4    Charmeleon
+Name: Pokemon, dtype: object
+
+#in
+pokemon[0]
+#out
+'Bulbasaur'
+
+#in
+pokemon[0] = "Borisaur"
+pokemon.head()
+#out
+0      Borisaur
+1       Ivysaur
+2      Venusaur
+3    Charmander
+4    Charmeleon
+Name: Pokemon, dtype: object
+
+#in
+pokemon[1500] = "Hello"
+pokemon
+#out
+0         Borisaur
+1          Ivysaur
+2         Venusaur
+3       Charmander
+4       Charmeleon
+           ...    
+717        Zygarde
+718        Diancie
+719          Hoopa
+720      Volcanion
+1500         Hello
+Name: Pokemon, Length: 722, dtype: object
+
+#in
+pokemon[[1, 2, 4]] = ["Firemon", "Flamemon", "Blazemon"]
+pokemon.head()
+#out
+0      Borisaur
+1       Firemon
+2      Flamemon
+3    Charmander
+4      Blazemon
+Name: Pokemon, dtype: object
+
+#in
+pokemon = pd.read_csv("pokemon.csv", index_col = ["Pokemon"]).squeeze("columns")
+pokemon.head()
+#out
+Pokemon
+Bulbasaur     Grass
+Ivysaur       Grass
+Venusaur      Grass
+Charmander     Fire
+Charmeleon     Fire
+Name: Type, dtype: object
+
+#in
+pokemon["Bulbasaur" = "Awesomemon"]
+#out
+ Cell In[15], line 1
+    pokemon["Bulbasaur" = "Awesomemon"]
+            ^
+SyntaxError: cannot assign to literal here. Maybe you meant '==' instead of '='?
+
+#in
+pokemon["Bulbasaur"] = "Awesomemon"
+pokemon.head()
+#out
+Pokemon
+Bulbasaur     Awesomemon
+Ivysaur            Grass
+Venusaur           Grass
+Charmander          Fire
+Charmeleon          Fire
+Name: Type, dtype: object
+
+#in
+pokemon[1] = "Grassmon"
+pokemon.head()
+#out
+Pokemon
+Bulbasaur     Awesomemon
+Ivysaur         Grassmon
+Venusaur           Grass
+Charmander          Fire
+Charmeleon          Fire
+Name: Type, dtype: object
+
+## The copy Method ##
 
 
 ## EXERCISE ##
