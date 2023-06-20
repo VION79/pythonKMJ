@@ -5292,6 +5292,126 @@ esp_color = guitars["ESP Eclipse"]
 ## The get Method on a Series ##
 #################################################
 
+#in
+pokemon.head()
+#out
+Pokemon
+Bulbasaur     Grass
+Ivysaur       Grass
+Venusaur      Grass
+Charmander     Fire
+Charmeleon     Fire
+Name: Type, dtype: object
+
+#in
+pokemon.get(0)
+#out
+'Grass'
+
+#in
+pokemon.get("Bulbasaur")
+#out
+'Grass'
+
+#in
+pokemon.get([5, 10])
+#out
+Pokemon
+Charizard    Fire
+Metapod       Bug
+Name: Type, dtype: object
+
+#in
+pokemon.get(["Moltres", "Meowth"])
+#out
+Pokemon
+Moltres      Fire
+Meowth     Normal
+Name: Type, dtype: object
+
+#in
+pokemon["Digimon"]
+#out
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\indexes\base.py:3802, in Index.get_loc(self, key, method, tolerance)
+   3801 try:
+-> 3802     return self._engine.get_loc(casted_key)
+   3803 except KeyError as err:
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\_libs\index.pyx:138, in pandas._libs.index.IndexEngine.get_loc()
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\_libs\index.pyx:165, in pandas._libs.index.IndexEngine.get_loc()
+
+File pandas\_libs\hashtable_class_helper.pxi:5745, in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+File pandas\_libs\hashtable_class_helper.pxi:5753, in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+KeyError: 'Digimon'
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+Cell In[34], line 1
+----> 1 pokemon["Digimon"]
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\series.py:981, in Series.__getitem__(self, key)
+    978     return self._values[key]
+    980 elif key_is_scalar:
+--> 981     return self._get_value(key)
+    983 if is_hashable(key):
+    984     # Otherwise index.get_value will raise InvalidIndexError
+    985     try:
+    986         # For labels that don't resolve as scalars like tuples and frozensets
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\series.py:1089, in Series._get_value(self, label, takeable)
+   1086     return self._values[label]
+   1088 # Similar to Index.get_value, but we do not fall back to positional
+-> 1089 loc = self.index.get_loc(label)
+   1090 return self.index._get_values_for_loc(self, loc, label)
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\indexes\base.py:3804, in Index.get_loc(self, key, method, tolerance)
+   3802     return self._engine.get_loc(casted_key)
+   3803 except KeyError as err:
+-> 3804     raise KeyError(key) from err
+   3805 except TypeError:
+   3806     # If we have a listlike key, _check_indexing_error will raise
+   3807     #  InvalidIndexError. Otherwise we fall through and re-raise
+   3808     #  the TypeError.
+   3809     self._check_indexing_error(key)
+
+KeyError: 'Digimon'
+
+#in
+pokemon.get("Digimon")
+print(pokemon.get("Digimon"))
+#out
+None
+
+#in
+pokemon.get("Digimon", "Nonexistent")
+#out
+'Nonexistent'
+
+#in
+pokemon.get("Moltres", "Nonexistent")
+#out
+'Fire'
+
+#in
+pokemon.get(["Moltres", "Gigimon"], "Nonexistent")
+#out
+'Nonexistent'
+
+#in
+pokemon.get(["Moltres", "Gigimon"])
+print(pokemon.get(["Moltres", "Gigimon"]))
+#out
+None
+
+## Overwrite a Series Value ##
+
+
 ## EXERCISE ##
 
 ##
