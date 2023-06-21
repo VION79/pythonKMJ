@@ -5513,6 +5513,98 @@ Name: Type, dtype: object
 
 ## The copy Method ##
 
+#in
+pokemon_df = pd.read_csv("pokemon.csv", usecols = ["Pokemon"])
+pokemon_df
+#out
+Pokemon
+0	Bulbasaur
+1	Ivysaur
+2	Venusaur
+3	Charmander
+4	Charmeleon
+...	...
+716	Yveltal
+717	Zygarde
+718	Diancie
+719	Hoopa
+720	Volcanion
+721 rows × 1 columns
+
+#in
+pokemon_series = pokemon_df.squeeze("columns")
+pokemon_series
+#out
+0       Bulbasaur
+1         Ivysaur
+2        Venusaur
+3      Charmander
+4      Charmeleon
+          ...    
+716       Yveltal
+717       Zygarde
+718       Diancie
+719         Hoopa
+720     Volcanion
+Name: Pokemon, Length: 721, dtype: object
+
+#in
+pokemon_series[0] = "Whatever" ##creates the ripple affect as below to be aware of
+pokemon_series.head(1)
+#out
+0    Whatever
+Name: Pokemon, dtype: object
+
+#in
+pokemon_df
+#out
+Pokemon
+0	Whatever
+1	Ivysaur
+2	Venusaur
+3	Charmander
+4	Charmeleon
+...	...
+716	Yveltal
+717	Zygarde
+718	Diancie
+719	Hoopa
+720	Volcanion
+721 rows × 1 columns
+
+# Big House (DataFrame)
+#  Door (Series)
+#   ^ change to the dorr will affect the Big House
+# Therefore a copy needs to be made
+
+#in
+pokemon_df = pd.read_csv("pokemon.csv", usecols = ["Pokemon"])
+pokemon_series = pokemon_df.squeeze("columns").copy()
+pokemon_series[0] = "Whatever"
+pokemon_series.head(1)
+#out
+0    Whatever
+Name: Pokemon, dtype: object
+
+#in
+pokemon_df
+#out
+Pokemon
+0	Bulbasaur
+1	Ivysaur
+2	Venusaur
+3	Charmander
+4	Charmeleon
+...	...
+716	Yveltal
+717	Zygarde
+718	Diancie
+719	Hoopa
+720	Volcanion
+721 rows × 1 columns
+
+## The inplace Parameter ##
+
 
 ## EXERCISE ##
 
