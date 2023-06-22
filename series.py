@@ -5605,6 +5605,294 @@ Pokemon
 
 ## The inplace Parameter ##
 
+#in
+pd.read_csv("google_stock_price.csv", usecols = ["Stock Price"]).squeeze("columns")
+#out
+0        50.12
+1        54.10
+2        54.65
+3        52.38
+4        52.95
+         ...  
+3007    772.88
+3008    771.07
+3009    773.18
+3010    771.61
+3011    782.22
+Name: Stock Price, Length: 3012, dtype: float64
+
+#in
+pd.read_csv("google_stock_price.csv", usecols = ["Stock Price"]).squeeze("columns").copy()
+#out
+0        50.12
+1        54.10
+2        54.65
+3        52.38
+4        52.95
+         ...  
+3007    772.88
+3008    771.07
+3009    773.18
+3010    771.61
+3011    782.22
+Name: Stock Price, Length: 3012, dtype: float64
+
+#in
+google = (
+    pd.read_csv("google_stock_price.csv", usecols = ["Stock Price"])
+    .squeeze("columns")
+    .copy()
+)
+google
+#out
+0        50.12
+1        54.10
+2        54.65
+3        52.38
+4        52.95
+         ...  
+3007    772.88
+3008    771.07
+3009    773.18
+3010    771.61
+3011    782.22
+Name: Stock Price, Length: 3012, dtype: float64
+
+#in
+google.sort_values()
+#out
+11       49.95
+9        50.07
+0        50.12
+10       50.70
+12       50.74
+         ...  
+3010    771.61
+3007    772.88
+3009    773.18
+2859    776.60
+3011    782.22
+Name: Stock Price, Length: 3012, dtype: float64
+
+#in
+google = google.sort_values()
+google.head()
+#out
+11    49.95
+9     50.07
+0     50.12
+10    50.70
+12    50.74
+Name: Stock Price, dtype: float64
+
+#in
+google = (
+    pd.read_csv("google_stock_price.csv", usecols = ["Stock Price"])
+    .squeeze("columns")
+    .copy()
+)
+google.head()
+#out
+0    50.12
+1    54.10
+2    54.65
+3    52.38
+4    52.95
+Name: Stock Price, dtype: float64
+
+#in
+google.sort_values()
+#out
+11       49.95
+9        50.07
+0        50.12
+10       50.70
+12       50.74
+         ...  
+3010    771.61
+3007    772.88
+3009    773.18
+2859    776.60
+3011    782.22
+Name: Stock Price, Length: 3012, dtype: float64
+
+#in
+google
+#out
+0        50.12
+1        54.10
+2        54.65
+3        52.38
+4        52.95
+         ...  
+3007    772.88
+3008    771.07
+3009    773.18
+3010    771.61
+3011    782.22
+Name: Stock Price, Length: 3012, dtype: float64
+
+#in
+import pandas as pd
+google = (
+    pd.read_csv("google_stock_price.csv", usecols = ["Stock Price"])
+    .squeeze("columns")
+    .copy()
+)
+google.sort_values(inplace = True)
+google
+#out
+11       49.95
+9        50.07
+0        50.12
+10       50.70
+12       50.74
+         ...  
+3010    771.61
+3007    772.88
+3009    773.18
+2859    776.60
+3011    782.22
+Name: Stock Price, Length: 3012, dtype: float64
+
+#in
+google.sort_index()
+#out
+0        50.12
+1        54.10
+2        54.65
+3        52.38
+4        52.95
+         ...  
+3007    772.88
+3008    771.07
+3009    773.18
+3010    771.61
+3011    782.22
+Name: Stock Price, Length: 3012, dtype: float64
+
+#in
+google
+#out
+11       49.95
+9        50.07
+0        50.12
+10       50.70
+12       50.74
+         ...  
+3010    771.61
+3007    772.88
+3009    773.18
+2859    776.60
+3011    782.22
+Name: Stock Price, Length: 3012, dtype: float64
+
+#in
+google.sort_index(inplace = True)
+google
+#out
+0        50.12
+1        54.10
+2        54.65
+3        52.38
+4        52.95
+         ...  
+3007    772.88
+3008    771.07
+3009    773.18
+3010    771.61
+3011    782.22
+Name: Stock Price, Length: 3012, dtype: float64
+
+#in
+google = (
+    pd.read_csv("google_stock_price.csv", usecols = ["Stock Price"])
+    .squeeze("columns")
+
+)
+google
+#out
+0        50.12
+1        54.10
+2        54.65
+3        52.38
+4        52.95
+         ...  
+3007    772.88
+3008    771.07
+3009    773.18
+3010    771.61
+3011    782.22
+Name: Stock Price, Length: 3012, dtype: float64
+
+#in
+google.sort_values()
+#out
+11       49.95
+9        50.07
+0        50.12
+10       50.70
+12       50.74
+         ...  
+3010    771.61
+3007    772.88
+3009    773.18
+2859    776.60
+3011    782.22
+Name: Stock Price, Length: 3012, dtype: float64
+
+#in
+google.sort_values(inplace = True)
+#out
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+Cell In[15], line 1
+----> 1 google.sort_values(inplace = True)
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\util\_decorators.py:331, in deprecate_nonkeyword_arguments.<locals>.decorate.<locals>.wrapper(*args, **kwargs)
+    325 if len(args) > num_allow_args:
+    326     warnings.warn(
+    327         msg.format(arguments=_format_argument_list(allow_args)),
+    328         FutureWarning,
+    329         stacklevel=find_stack_level(),
+    330     )
+--> 331 return func(*args, **kwargs)
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\series.py:3748, in Series.sort_values(self, axis, ascending, inplace, kind, na_position, ignore_index, key)
+   3746 # GH 5856/5853
+   3747 if inplace and self._is_cached:
+-> 3748     raise ValueError(
+   3749         "This Series is a view of some other array, to "
+   3750         "sort in-place you must create a copy"
+   3751     )
+   3753 if is_list_like(ascending):
+   3754     ascending = cast(Sequence[Union[bool, int]], ascending)
+
+ValueError: This Series is a view of some other array, to sort in-place you must create a copy
+
+#in
+google2 = google.copy()
+google2.sort_values(inplace = True)
+google2
+#out
+11       49.95
+9        50.07
+0        50.12
+10       50.70
+12       50.74
+         ...  
+3010    771.61
+3007    772.88
+3009    773.18
+2859    776.60
+3011    782.22
+Name: Stock Price, Length: 3012, dtype: float64
+
+## Math Methods on Series Objects ##
+
+
+
+
 
 ## EXERCISE ##
 
