@@ -5890,6 +5890,79 @@ Name: Stock Price, Length: 3012, dtype: float64
 
 ## Math Methods on Series Objects ##
 
+#in
+import pandas as pd
+google = pd.read_csv("google_stock_price.csv", usecols = ["Stock Price"]).squeeze("columns")
+google.head()
+#out
+0    50.12
+1    54.10
+2    54.65
+3    52.38
+4    52.95
+Name: Stock Price, dtype: float64
+
+#in
+google.count()
+#out
+3012
+
+#in
+google.sum()
+#out
+1006942.0
+
+#in
+google.mean()
+#out
+334.3100929614874
+
+#in
+google.product()
+#out
+inf
+
+#in
+google.std()
+#out
+173.18720477113106
+
+#in
+google.min()
+#out
+49.95
+
+#in
+google.max()
+#out
+782.22
+
+#in
+google.median()
+#out
+283.315
+
+#in
+google.mode()
+#out
+0    291.21
+Name: Stock Price, dtype: float64
+
+#in
+google.describe()
+#out
+count    3012.000000
+mean      334.310093
+std       173.187205
+min        49.950000
+25%       218.045000
+50%       283.315000
+75%       443.000000
+max       782.220000
+Name: Stock Price, dtype: float64
+
+## Broadcasting ##
+
 
 
 
