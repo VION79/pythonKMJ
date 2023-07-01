@@ -6045,6 +6045,262 @@ Name: Stock Price, Length: 3012, dtype: float64
 
 ## The value_counts Method ##
 
+#in
+pokemon = pd.read_csv("pokemon.csv", index_col = "Pokemon").squeeze("columns")
+pokemon.head()
+#out
+Pokemon
+Bulbasaur     Grass
+Ivysaur       Grass
+Venusaur      Grass
+Charmander     Fire
+Charmeleon     Fire
+Name: Type, dtype: object
+
+#in
+pokemon.value_counts()
+#out
+Water       105
+Normal       93
+Grass        66
+Bug          63
+Fire         47
+Psychic      47
+Rock         41
+Electric     36
+Ground       30
+Poison       28
+Dark         28
+Fighting     25
+Dragon       24
+Ghost        23
+Ice          23
+Steel        22
+Fairy        17
+Flying        3
+Name: Type, dtype: int64
+
+#in
+pokemon.value_counts(ascending = True)
+#out
+Flying        3
+Fairy        17
+Steel        22
+Ghost        23
+Ice          23
+Dragon       24
+Fighting     25
+Poison       28
+Dark         28
+Ground       30
+Electric     36
+Rock         41
+Psychic      47
+Fire         47
+Bug          63
+Grass        66
+Normal       93
+Water       105
+Name: Type, dtype: int64
+
+#in
+pokemon.value_counts(ascending = True).head()
+#out
+Flying     3
+Fairy     17
+Steel     22
+Ghost     23
+Ice       23
+Name: Type, dtype: int64
+
+#in
+pokemon.value_counts(sort = False)
+#out
+Grass        66
+Fire         47
+Water       105
+Bug          63
+Normal       93
+Poison       28
+Electric     36
+Ground       30
+Fairy        17
+Fighting     25
+Psychic      47
+Rock         41
+Ghost        23
+Ice          23
+Dragon       24
+Dark         28
+Steel        22
+Flying        3
+Name: Type, dtype: int64
+
+#in
+pokemon.value_counts(normalize = True)
+#out
+Water       0.145631
+Normal      0.128988
+Grass       0.091540
+Bug         0.087379
+Fire        0.065187
+Psychic     0.065187
+Rock        0.056865
+Electric    0.049931
+Ground      0.041609
+Poison      0.038835
+Dark        0.038835
+Fighting    0.034674
+Dragon      0.033287
+Ghost       0.031900
+Ice         0.031900
+Steel       0.030513
+Fairy       0.023578
+Flying      0.004161
+Name: Type, dtype: float64
+
+#in
+pokemon.value_counts(normalize = True) * 100
+#out
+Water       14.563107
+Normal      12.898752
+Grass        9.153953
+Bug          8.737864
+Fire         6.518724
+Psychic      6.518724
+Rock         5.686546
+Electric     4.993065
+Ground       4.160888
+Poison       3.883495
+Dark         3.883495
+Fighting     3.467406
+Dragon       3.328710
+Ghost        3.190014
+Ice          3.190014
+Steel        3.051318
+Fairy        2.357836
+Flying       0.416089
+Name: Type, dtype: float64
+
+#in
+pokemon.value_counts(normalize = True) * 100
+#out
+Water       14.563107
+Normal      12.898752
+Grass        9.153953
+Bug          8.737864
+Fire         6.518724
+Psychic      6.518724
+Rock         5.686546
+Electric     4.993065
+Ground       4.160888
+Poison       3.883495
+Dark         3.883495
+Fighting     3.467406
+Dragon       3.328710
+Ghost        3.190014
+Ice          3.190014
+Steel        3.051318
+Fairy        2.357836
+Flying       0.416089
+Name: Type, dtype: float64
+
+#in
+pokemon.value_counts(normalize = True).sum() * 100
+#out
+99.99999999999999
+
+## Excerise ##
+# If you see a test failure when checking your solution,
+# note that [left] refers to YOUR code while [right]
+# refers to the correct code that the computer is comparing
+# to your work
+
+import pandas as pd
+
+# We have a hot_dogs.csv CSV file with 2 columns: Year and Winner.
+# The dataset stores the winner of the world-famous Nathan's Hot Dog Eating
+# contest for each year since 1967. You can explore the data by clicking into 
+# the CSV file on the left.
+#
+# Import the CSV file into a pandas Series object
+# The Series should have the standard pandas numeric index
+# The Series values should be the string values from the "Winner" column
+# Assign the Series object to a "hot_dogs" variable
+hot_dogs = pd.read_csv("hot_dogs.csv", usecols = ["Winner"]).squeeze("columns")
+
+# or 
+# hot_dogs = pd.read_csv("hot_dogs.csv", usecols = ["Winner"], squeeze = True)
+
+
+# I'm curious how many times each winner has won the hot dog-eating contest.
+# Create a new Series that shows each person's name (index labels) 
+# and the number of times they've won (the values). What method can
+# help you generate this Series?
+# Asssign the Series to a "names_and_wins" variable.
+names_and_wins = hot_dogs.value_counts()
+
+##The Apply Method##
+
+#in
+len("Grass")
+#out
+5
+
+#in
+pokemon.apply(len)
+#out
+Pokemon
+Bulbasaur     5
+Ivysaur       5
+Venusaur      5
+Charmander    4
+Charmeleon    4
+             ..
+Yveltal       4
+Zygarde       6
+Diancie       4
+Hoopa         7
+Volcanion     4
+Name: Type, Length: 721, dtype: int64
+
+#in
+def rank_pokemon(pokemon_type):
+    if pokemon_type in ["Grass", "Fire", "Water"]:
+        return "Classic"
+    elif pokemon_type == "Normal":
+        return "Boring"
+    else:
+        return "TBD"
+
+pokemon.apply(rank_pokemon)
+#out
+Pokemon
+Bulbasaur     Classic
+Ivysaur       Classic
+Venusaur      Classic
+Charmander    Classic
+Charmeleon    Classic
+               ...   
+Yveltal           TBD
+Zygarde           TBD
+Diancie           TBD
+Hoopa             TBD
+Volcanion     Classic
+Name: Type, Length: 721, dtype: object
+
+#in
+pokemon.apply(rank_pokemon).value_counts()
+#out
+TBD        410
+Classic    218
+Boring      93
+Name: Type, dtype: int64
+
+## The map Method ##
+
+
+
 
 
 
