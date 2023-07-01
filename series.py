@@ -6299,6 +6299,84 @@ Name: Type, dtype: int64
 
 ## The map Method ##
 
+#in
+pokemon.head()
+#out
+Pokemon
+Bulbasaur     Grass
+Ivysaur       Grass
+Venusaur      Grass
+Charmander     Fire
+Charmeleon     Fire
+Name: Type, dtype: object
+
+#in
+mappings = {
+    "Grass": "Classic",
+    "Fire": "Classic",
+    "Water": "Classic",
+    "Normal": "Boring"
+} 
+pokemon.map(mappings)
+#out
+Pokemon
+Bulbasaur     Classic
+Ivysaur       Classic
+Venusaur      Classic
+Charmander    Classic
+Charmeleon    Classic
+               ...   
+Yveltal           NaN
+Zygarde           NaN
+Diancie           NaN
+Hoopa             NaN
+Volcanion     Classic
+Name: Type, Length: 721, dtype: object
+
+#in
+pokemon.tail()
+#out
+Pokemon
+Yveltal         Dark
+Zygarde       Dragon
+Diancie         Rock
+Hoopa        Psychic
+Volcanion       Fire
+Name: Type, dtype: object
+
+#in
+mappings = {
+    "Grass": "Classic",
+    "Fire": "Classic",
+    "Water": "Classic",
+    "Normal": "Boring"
+}
+mappings_series = pd.Series(mappings)
+mappings_series
+#out
+Grass     Classic
+Fire      Classic
+Water     Classic
+Normal     Boring
+dtype: object
+
+#in
+pokemon.map(mappings_series)
+#out
+Pokemon
+Bulbasaur     Classic
+Ivysaur       Classic
+Venusaur      Classic
+Charmander    Classic
+Charmeleon    Classic
+               ...   
+Yveltal           NaN
+Zygarde           NaN
+Diancie           NaN
+Hoopa             NaN
+Volcanion     Classic
+Name: Type, Length: 721, dtype: object
+​
 
 
 
