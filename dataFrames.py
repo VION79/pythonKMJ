@@ -266,3 +266,86 @@ dtypes: float64(4), object(5)
 memory usage: 32.3+ KB
 
 ## Differences between Shared Methods ##
+
+#in
+pd.read_csv("revenue.csv")
+#out
+Date	New York	Los Angeles	Miami
+0	1/1/16	985	122	499
+1	1/2/16	738	788	534
+2	1/3/16	14	20	933
+3	1/4/16	730	904	885
+4	1/5/16	114	71	253
+5	1/6/16	936	502	497
+6	1/7/16	123	996	115
+7	1/8/16	935	492	886
+8	1/9/16	846	954	823
+9	1/10/16	54	285	216
+
+#in
+revenue = pd.read_csv("revenue.csv", index_col = "Date")
+revenue
+#out
+New York	Los Angeles	Miami
+Date			
+1/1/16	985	122	499
+1/2/16	738	788	534
+1/3/16	14	20	933
+1/4/16	730	904	885
+1/5/16	114	71	253
+1/6/16	936	502	497
+1/7/16	123	996	115
+1/8/16	935	492	886
+1/9/16	846	954	823
+1/10/16	54	285	216
+
+#in
+s = pd.Series([1, 2, 3])
+s
+#out
+0    1
+1    2
+2    3
+dtype: int64
+
+#in
+s.sum()
+#out
+6
+
+#in
+revenue.sum()
+#out
+New York       5475
+Los Angeles    5134
+Miami          5641
+dtype: int64
+
+#in
+revenue.sum(axis = "columns")
+#or
+revenue.sum(axis = 1)
+#out
+Date
+1/1/16     1606
+1/2/16     2060
+1/3/16      967
+1/4/16     2519
+1/5/16      438
+1/6/16     1935
+1/7/16     1234
+1/8/16     2313
+1/9/16     2623
+1/10/16     555
+dtype: int64
+
+#in
+revenue.sum()
+revenue.sum(axis = "index")
+revenue.sum(axis = 0)
+#out
+New York       5475
+Los Angeles    5134
+Miami          5641
+dtype: int64
+
