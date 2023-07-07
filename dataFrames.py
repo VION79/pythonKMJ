@@ -349,3 +349,230 @@ Los Angeles    5134
 Miami          5641
 dtype: int64
 
+## Select One Column from a DataFrame ##
+
+#in
+import pandas as pd
+nba = pd.read_csv("nba.csv")
+nba.head()
+#out
+Name	Team	Number	Position	Age	Height	Weight	College	Salary
+0	Avery Bradley	Boston Celtics	0.0	PG	25.0	6-2	180.0	Texas	7730337.0
+1	Jae Crowder	Boston Celtics	99.0	SF	25.0	6-6	235.0	Marquette	6796117.0
+2	John Holland	Boston Celtics	30.0	SG	27.0	6-5	205.0	Boston University	NaN
+3	R.J. Hunter	Boston Celtics	28.0	SG	22.0	6-5	185.0	Georgia State	1148640.0
+4	Jonas Jerebko	Boston Celtics	8.0	PF	29.0	6-10	231.0	NaN	5000000.0
+
+#in
+nba.Name
+#out
+0      Avery Bradley
+1        Jae Crowder
+2       John Holland
+3        R.J. Hunter
+4      Jonas Jerebko
+           ...      
+453     Shelvin Mack
+454        Raul Neto
+455     Tibor Pleiss
+456      Jeff Withey
+457              NaN
+Name: Name, Length: 458, dtype: object
+
+#in
+type(nba.Name)
+#out
+pandas.core.series.Series
+
+#in
+nba.Number
+#out
+0       0.0
+1      99.0
+2      30.0
+3      28.0
+4       8.0
+       ... 
+453     8.0
+454    25.0
+455    21.0
+456    24.0
+457     NaN
+Name: Number, Length: 458, dtype: float64
+
+#in
+nba.Salary
+#out
+0      7730337.0
+1      6796117.0
+2            NaN
+3      1148640.0
+4      5000000.0
+         ...    
+453    2433333.0
+454     900000.0
+455    2900000.0
+456     947276.0
+457          NaN
+Name: Salary, Length: 458, dtype: float64
+
+#in
+nba.First Name
+#out
+  Cell In[7], line 1
+    nba.First Name
+              ^
+SyntaxError: invalid syntax
+
+
+#in
+nba["Name"]
+#out
+0      Avery Bradley
+1        Jae Crowder
+2       John Holland
+3        R.J. Hunter
+4      Jonas Jerebko
+           ...      
+453     Shelvin Mack
+454        Raul Neto
+455     Tibor Pleiss
+456      Jeff Withey
+457              NaN
+Name: Name, Length: 458, dtype: object
+
+#in
+nba["Number"]
+#out
+0       0.0
+1      99.0
+2      30.0
+3      28.0
+4       8.0
+       ... 
+453     8.0
+454    25.0
+455    21.0
+456    24.0
+457     NaN
+Name: Number, Length: 458, dtype: float64
+
+#in
+nba["number"]
+#out
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\indexes\base.py:3802, in Index.get_loc(self, key, method, tolerance)
+   3801 try:
+-> 3802     return self._engine.get_loc(casted_key)
+   3803 except KeyError as err:
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\_libs\index.pyx:138, in pandas._libs.index.IndexEngine.get_loc()
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\_libs\index.pyx:165, in pandas._libs.index.IndexEngine.get_loc()
+
+File pandas\_libs\hashtable_class_helper.pxi:5745, in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+File pandas\_libs\hashtable_class_helper.pxi:5753, in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+KeyError: 'number'
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+Cell In[10], line 1
+----> 1 nba["number"]
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\frame.py:3807, in DataFrame.__getitem__(self, key)
+   3805 if self.columns.nlevels > 1:
+   3806     return self._getitem_multilevel(key)
+-> 3807 indexer = self.columns.get_loc(key)
+   3808 if is_integer(indexer):
+   3809     indexer = [indexer]
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\indexes\base.py:3804, in Index.get_loc(self, key, method, tolerance)
+   3802     return self._engine.get_loc(casted_key)
+   3803 except KeyError as err:
+-> 3804     raise KeyError(key) from err
+   3805 except TypeError:
+   3806     # If we have a listlike key, _check_indexing_error will raise
+   3807     #  InvalidIndexError. Otherwise we fall through and re-raise
+   3808     #  the TypeError.
+   3809     self._check_indexing_error(key)
+
+KeyError: 'number'
+
+#in
+nba["First Name"]
+#out
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\indexes\base.py:3802, in Index.get_loc(self, key, method, tolerance)
+   3801 try:
+-> 3802     return self._engine.get_loc(casted_key)
+   3803 except KeyError as err:
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\_libs\index.pyx:138, in pandas._libs.index.IndexEngine.get_loc()
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\_libs\index.pyx:165, in pandas._libs.index.IndexEngine.get_loc()
+
+File pandas\_libs\hashtable_class_helper.pxi:5745, in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+File pandas\_libs\hashtable_class_helper.pxi:5753, in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+KeyError: 'First Name'
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+Cell In[11], line 1
+----> 1 nba["First Name"]
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\frame.py:3807, in DataFrame.__getitem__(self, key)
+   3805 if self.columns.nlevels > 1:
+   3806     return self._getitem_multilevel(key)
+-> 3807 indexer = self.columns.get_loc(key)
+   3808 if is_integer(indexer):
+   3809     indexer = [indexer]
+
+File ~\anaconda3\envs\pandas_playground\Lib\site-packages\pandas\core\indexes\base.py:3804, in Index.get_loc(self, key, method, tolerance)
+   3802     return self._engine.get_loc(casted_key)
+   3803 except KeyError as err:
+-> 3804     raise KeyError(key) from err
+   3805 except TypeError:
+   3806     # If we have a listlike key, _check_indexing_error will raise
+   3807     #  InvalidIndexError. Otherwise we fall through and re-raise
+   3808     #  the TypeError.
+   3809     self._check_indexing_error(key)
+
+KeyError: 'First Name'
+
+#in
+nba["Salary"].head().values
+#out
+array([7730337., 6796117.,      nan, 1148640., 5000000.])
+
+## Exercise ##
+# If you see a test failure when checking your solution,
+# note that [left] refers to YOUR code while [right]
+# refers to the correct code that the computer is comparing
+# to your work
+import pandas as pd 
+
+# This challenge includes a cruise_ships.csv with 4 columns: 
+# Name, Operator, Year, and Tonnage
+# Import the cruise_ships.csv DataFrame and assign it to
+# a cruise_ships variable
+cruise_ships = pd.read_csv("cruise_ships.csv")
+
+# Extract the "Operator" column from the DataFrame
+# and assign it to an "operators" variable.
+operators = cruise_ships["Operator"]
+​
+# Extract the "Tonnage" column from the DataFrame
+# and assign it to an "tonnages" variable.
+tonnages = cruise_ships["Tonnage"]
+​
+# Extract the "Name" column from the DataFrame
+# and assign it to an "cruise_names" variable.
+cruise_names = cruise_ships["Name"]
